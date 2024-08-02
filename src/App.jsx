@@ -1,13 +1,13 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Title } from './components/components'
+import { Header } from './components/Header/Header'
 
 function App() {
 
   return (
     <>
-      <Title>E-TAC-TOE</Title>
+      <Header/>
     </>
   )
 }
