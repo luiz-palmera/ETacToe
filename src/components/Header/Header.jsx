@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Menu from '../../assets/menu.svg'
 import { useState } from 'react';
-import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { DrawerContent } from '../DrawerContent/DrawerContent';
+import { Drawer } from '@mui/material';
 
 
 const Wrapper = styled.div`
@@ -14,6 +15,10 @@ const Wrapper = styled.div`
   padding: 0;
   flex-direction: row;
 `
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
 
 const Title = styled.h1`
   font-size: 18px;
@@ -21,11 +26,11 @@ const Title = styled.h1`
   font-weight: 800;
   justify-content: flex-start;
   margin: 0;
-  padding-left: 20px;
+  padding-left: 10px;
   padding-top: 7px;
 `
 
-const MenuImage = styled.img`
+const MenuIcon = styled.img`
   padding-left: 20px;
   width:30px;
   transition: width 0.3s;
@@ -43,31 +48,24 @@ export const Header = () => {
     };
 
 
-    //criar componente em arquivo separado para a drower
-    const DrawerList = (
-        <Box sx={{ width:250 }} role="presentation" onClick={toggleDrawer(false)} >
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-    )
-
     return (
         <Wrapper>
-            <MenuImage src={Menu} onClick={toggleDrawer(true)} />
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-                {DrawerList}
-            </Drawer>
-            <Title>
+            <TitleWrapper>
+              <MenuIcon src={Menu} onClick={toggleDrawer(true)} />
+              <Drawer
+                  PaperProps={{
+                    sx: {
+                      backgroundColor: "#0D0106"
+                    }
+                  }}
+                  open={open}
+                  onClose={toggleDrawer(false)} >
+                <DrawerContent/>
+              </Drawer>
+              <Title>
                 E-TAC-TOE
-            </Title>
+              </Title>
+              </TitleWrapper>
         </Wrapper>
     )
 }
