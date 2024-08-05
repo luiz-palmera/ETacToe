@@ -14,13 +14,14 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   flex-direction: row;
+  border-bottom: solid #545F4F;
 `
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 18px;
   color: #545F4F;  
   font-weight: 800;
@@ -40,32 +41,30 @@ const MenuIcon = styled.img`
   }
 `
 
-export const Header = () => {
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = (newOpen) => () => {
-        setOpen(newOpen);
-    };
-
-
-    return (
-        <Wrapper>
-            <TitleWrapper>
-              <MenuIcon src={Menu} onClick={toggleDrawer(true)} />
-              <Drawer
-                  PaperProps={{
-                    sx: {
-                      backgroundColor: "#0D0106"
-                    }
-                  }}
-                  open={open}
-                  onClose={toggleDrawer(false)} >
-                <DrawerContent/>
-              </Drawer>
-              <Title>
-                E-TAC-TOE
-              </Title>
-              </TitleWrapper>
-        </Wrapper>
-    )
+export const Header = ({...props}) => {
+  const [open, setOpen] = useState(false);
+  
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+  return (
+    <Wrapper>
+      <TitleWrapper>
+        <MenuIcon src={Menu} onClick={toggleDrawer(true)} />
+        <Drawer
+          PaperProps={{
+            sx: {
+              backgroundColor: "#0D0106"
+            }
+          }}
+          open={open}
+          onClose={toggleDrawer(false)} >
+          <DrawerContent />
+        </Drawer>
+        {(props.title === true) ? (<Title>
+          E-TAC-TOE
+        </Title>) : null}
+      </TitleWrapper>
+    </Wrapper>
+  )
 }
